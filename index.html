@@ -7,20 +7,21 @@
 <body>
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script src="purchased.js"></script>
+<script src="plottable.js"></script>
 <script>
 
 d3.text("portfolio.csv", function(textcsv) {
-        var headercsv = "ETF,Last,Day50,Day200\n";
+        var headercsv = "ETF,Last,Avg50,Avg200\n";
         var pricedata = d3.csv.parse(headercsv+textcsv, function(d) {
             return {
                 ETF: d.ETF,
                 Last: +d.Last,
-                Day50: +d.Day50,
-                Day200: +d.Day200
+                Avg50: +d.Avg50,
+                Avg200: +d.Avg200
                 };
             });
 
-        console.log(pricedata);
+        console.log(dataconvert(pricedata, "Last"));
         });
 
 </script>
