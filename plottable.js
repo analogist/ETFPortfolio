@@ -14,7 +14,7 @@ var formattable = function(d, i) {
 }
 
 var dataconvert = function(data, usemetric){
-    tableheaders = ["ETF", usemetric, "Percent", "Shares"];
+    tableheaders = ["ETF", usemetric, "Percent"];
 
     datasum = d3.sum(
             data.map(function(d) {
@@ -27,7 +27,6 @@ var dataconvert = function(data, usemetric){
             ETF: d["ETF"],
             metric: purchasedrow,
             percent: purchasedrow/datasum,
-            shares: purchased[d.ETF]
         };
     });
 }
