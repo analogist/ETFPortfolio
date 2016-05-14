@@ -8,11 +8,15 @@
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script src="purchased.js"></script>
 <script src="plottable.js"></script>
+<script src="plotsliders.js"></script>
 <script>
+
+pricedata = [];
+metric = "Last";
 
 d3.text("portfolio.csv", function(textcsv) {
         var headercsv = "ETF,Last,Avg50,Avg200\n";
-        var pricedata = d3.csv.parse(headercsv+textcsv, function(d) {
+        pricedata = d3.csv.parse(headercsv+textcsv, function(d) {
             return {
                 ETF: d.ETF,
                 Last: +d.Last,
@@ -21,12 +25,15 @@ d3.text("portfolio.csv", function(textcsv) {
                 };
             });
 
-        maketable(pricedata, "Last");
+        maketable(pricedata, metric);
+        makeslider();
         });
 
 </script>
 
 <div id="shareslider"></div>
+
+<br />
 <table id="sharestable"></table>
 
 </body>
