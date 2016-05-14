@@ -21,14 +21,20 @@ var dataconvert = function(data, usemetric){
                 return d[usemetric]*purchased[d.ETF];
             })
             );
+
     return data.map(function(d) {
         purchasedrow = d[usemetric]*purchased[d.ETF];
         return {
             ETF: d["ETF"],
             metric: purchasedrow,
-            percent: purchasedrow/datasum,
+            percent: purchasedrow/datasum
         };
-    });
+    }).concat(
+        [{
+            ETF: "Total",
+            metric: datasum,
+            percent: 1
+        }]);
 }
 
 var maketable = function(data_in, usemetric) {
@@ -50,6 +56,19 @@ var maketable = function(data_in, usemetric) {
         .selectAll("td")
         .data(function(d) { return d3.entries(d); })
         .enter().append("td")
+            .text(function(d, i) { return formattable(d, i); })
+
+}
+
+var updatetable = function(data_in, usemetric) {
+
+    recomputeddata = dataconvert(data_in, usemetric);
+
+    d3.select("table#sharestable").select("tbody")
+        .selectAll("tr")
+        .data(recomputeddata)
+        .selectAll("td")
+        .data(function(d) { return d3.entries(d); })
             .text(function(d, i) { return formattable(d, i); })
 
 }
