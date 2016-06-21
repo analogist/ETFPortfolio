@@ -1,7 +1,6 @@
 purchased = {
-VNQ: 2,
 BND: 12,
-VTI: 40,
-VEA: 64,
-VWO: 14
+VTI: 41,
+VEA: 65,
+VWO: 15
 };
